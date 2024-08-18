@@ -25,17 +25,24 @@ class Board
     @cells[number - 1] = symbol
   end
 
-  def place_symbol(number)
-    if @cells[number].is_a?(Integer)
-      update_board
+  def place_symbol(number, symbol)
+    if @cells[number - 1].is_a?(Integer)
+      update_board(number, symbol)
+      true
     else
-      'This cell is already taken, choose another spot.'
+      puts 'This cell is already taken, choose another spot.'
+      false
     end
   end
 
   def full_board?
-    @cells.none? { |cell| cell.is_a?(Integer) }
-    puts 'That\'s a draw!'
+    cells.none? { |cell| cell.is_a?(Integer) }
+  end
+
+  def game_over?(symbol)
+    winning_logic.any? do |combo|
+      combo.all? { |index| cells[index] == symbol }
+    end
   end
 
   private
@@ -50,7 +57,17 @@ class Board
       cell.to_s
     end
   end
-end
 
-board = Board.new
-puts board.display
+  def winning_logic
+    [
+      [0, 1, 2], # Top row.
+      [3, 4, 5], # Middle row.
+      [6, 7, 8], # Bottom row.
+      [0, 3, 6], # Left column.
+      [1, 4, 7], # Middle column.
+      [2, 5, 8], # Right column.
+      [0, 4, 8], # Left diagonal.
+      [2, 4, 6] # Right diagonal.
+    ]
+  end
+end
