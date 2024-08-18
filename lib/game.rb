@@ -16,13 +16,13 @@ class Game
   def start_game
     loop do
       board.display
-      player_move
-      if board.winning_logic
+      player_move(@current_player)
+      if board.game_over?(@current_player.symbol)
         board.display
-        puts "#{current_player} won!"
+        puts "#{@current_player.name} won!"
         play_again?
         break
-      elsif board.full_board
+      elsif board.full_board?
         board.display
         puts 'That\'s a draw!'
         play_again?
@@ -36,8 +36,8 @@ class Game
   private
 
   def setup_game
-    @player_one = create_player_one('Player 1', 'X')
-    @player_two = create_player_two('Player 2', 'O')
+    @player_one = current_player('Player 1', 'X')
+    @player_two = current_player('Player 2', 'O')
     @board = Board.new
     @current_player = player_one
   end
@@ -56,7 +56,7 @@ class Game
       exit_game if input.downcase == 'exit'
 
       number = input.to_i
-      break if board.place_symbol(number, player.symbol)
+      break if board.place_symbol(number, players.symbol)
 
       puts 'Invalid move. Pick a cell with a number'
     end
@@ -67,6 +67,7 @@ class Game
   end
 
   def play_again?
+    puts 'Do you want to play again? Type either: yes or no.'
     answer = gets.chomp.downcase
     if answer == 'yes'
       setup_game
