@@ -18,7 +18,8 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n\n"
   end
   # rubocop: enable Metrics/AbcSize
-end
 
-game = Board.new
-puts game.display
+  def update_board(number, symbol)
+    @cells[number - 1] = symbol
+  end
+end
