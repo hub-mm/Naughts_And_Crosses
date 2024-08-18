@@ -1,6 +1,6 @@
 Simple game of naughts and crosses.
-Runs in the command line.
-Created using ruby.
+\n Runs in the command line.
+\n Created using ruby.
 
 Bundle includes neccesary gems.
 
