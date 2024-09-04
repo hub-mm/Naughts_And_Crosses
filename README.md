@@ -4,8 +4,18 @@ Created using ruby.
 
 Bundle includes neccesary gems.  
 
-Run with:
-> ruby main.rb
+Clone repository with:
+```
+git clone git@github.com:hub-mm/naughts_and_crosses.git
+```
 
-Hope you enjoy!
+Navigate to file with:
+```
+cd naughts_and_crosses
+```
 
+Play with:
+```
+ruby main.rb
+```
+Hope you enjoy!  
